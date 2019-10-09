@@ -153,6 +153,16 @@ Route::group(['prefix' => 'query'], function () {
 
 });
 
+Route::get('test-model', function () {
+    $user=new App\User;
+    $user->email='A@gmail.com';
+    $user->password=bcrypt('123456');
+    $user->full='nguyễn A';
+    $user->address='Địa chỉ A';
+    $user->phone='123456789';
+    $user->level='2';
+    $user->save();
+});
 
 
 
@@ -196,7 +206,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'user'], function () {
         Route::get('','Backend\UserController@getListUser');
         Route::get('add','Backend\UserController@getAddUser');
-        Route::get('edit','Backend\UserController@getEditUser');
+        Route::post('add','Backend\UserController@postAddUser');
+        Route::get('edit/{idUser}','Backend\UserController@getEditUser');
+        Route::post('edit/{idUser}','Backend\UserController@postEditUser');
+        Route::get('del/{idUser}','Backend\UserController@delUser');
     });
     
 });

@@ -8,6 +8,13 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
+    //mặc định
+    //bảng liên kết là bảng users    ------- > để thay đổi : protected $table='Tên bảng liên kết';
+    //khoá chính là id               ------- > để thay đổi : protected $primaryKey = 'tên khoá chính';
+    //khoá chính là khoá tự tăng    ------- > để thay đổi :  public $incrementing = false;
+    //bảng liên kết có 2 trường created_at,updated_at  (timestamps=true)  ------- > để thay đổi : public $timestamps =false;
+    public $timestamps =false;
     use Notifiable;
 
     /**
