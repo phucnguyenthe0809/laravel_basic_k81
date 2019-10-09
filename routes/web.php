@@ -12,10 +12,6 @@
 */
 
 
-
-
-
-
 Route::get('','Frontend\HomeController@getIndex' );
 Route::get('about', 'Frontend\HomeController@getAbout');
 Route::get('contact','Frontend\HomeController@getContact');
