@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Requests\AddCategoryRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Category;
 class CategoryController extends Controller
 {
     function getCategory()
     {
-        return view('backend.category.category');
+        $data['categories']=Category::all()->toarray();
+        return view('backend.category.category',$data);
     }
     
     function getEditCategory()
