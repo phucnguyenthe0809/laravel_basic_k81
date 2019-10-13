@@ -52,42 +52,9 @@
 								<h3 style="margin: 0;"><strong>Phân cấp Menu</strong></h3>
 								<div class="vertical-menu">
 									<div class="item-menu active">Danh mục </div>
-									<div class="item-menu"><span>Nam</span>
-										<div class="category-fix">
-											<a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-											<a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
 
-										</div>
-									</div>
-									<div class="item-menu"><span>---|Áo khoác Nam</span>
-										<div class="category-fix">
-											<a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-											<a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-
-										</div>
-									</div>
-									<div class="item-menu"><span>---|---|Áo khoác Nam (Dành cho việc mở rộng)</span>
-										<div class="category-fix">
-											<a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-											<a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-
-										</div>
-									</div>
-									<div class="item-menu"><span>Nữ</span>
-										<div class="category-fix">
-											<a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-											<a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-
-										</div>
-									</div>
-									<div class="item-menu"><span>---|Áo khoác Nữ</span>
-										<div class="category-fix">
-											<a class="btn-category btn-primary" href="editcategory.html"><i class="fa fa-edit"></i></a>
-											<a class="btn-category btn-danger" href="#"><i class="fas fa-times"></i></i></a>
-
-										</div>
-									</div>
-
+									{{ showCategory($categories,0,'') }}
+								
 								</div>
 							</div>
 						</div>
