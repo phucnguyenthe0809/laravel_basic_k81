@@ -28,14 +28,14 @@
 								@csrf
 								<div class="form-group">
 									<label for="">Danh mục cha:</label>
-									<select class="form-control" name="" id="">
+									<select class="form-control" name="parent" >
 										<option value="0">----ROOT----</option>
-										{{ getCategory($categories,0,'') }}
+										{{ getCategory($categories,0,'',0) }}
 									</select>
 								</div>
 								<div class="form-group">
 									<label for="">Tên Danh mục</label>
-									<input type="text" class="form-control" name="name" id="" placeholder="Tên danh mục mới">
+									<input type="text" class="form-control" name="name"  placeholder="Tên danh mục mới">
 
 									{{ showError($errors,'name') }}
 								</div>

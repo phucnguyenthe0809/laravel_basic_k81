@@ -185,7 +185,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'category'], function () {
         Route::get('','Backend\CategoryController@getCategory');
         Route::post('','Backend\CategoryController@postCategory');
-        Route::get('edit','Backend\CategoryController@getEditCategory');
+        Route::get('edit/{idCate}','Backend\CategoryController@getEditCategory');
+        Route::get('delete/{idCate}','Backend\CategoryController@delCategory');
     });
 
     //order
