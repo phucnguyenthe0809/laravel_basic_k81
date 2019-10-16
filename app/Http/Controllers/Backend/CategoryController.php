@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 class CategoryController extends Controller
 {
+
     function getCategory()
     {
         $data['categories']=Category::all()->toarray();
@@ -20,6 +21,16 @@ class CategoryController extends Controller
         $data['cate']=Category::find($idCate);
         $data['categories']=Category::all()->toarray();
         return view('backend.category.editcategory',$data);
+    }
+
+    function postEditCategory($idCate,request $r)
+    {
+        $cate=Category::findOrFail($idCate);
+        $cate->name=$r->name;
+        $cate->slug=Str::slug($r->name,'-');
+        $cate->parent=$r->parent;
+        $cate->save();
+        return redirect()->back()->with('thongbao','Đã Sửa thành công.');
     }
 
     function postCategory(AddCategoryRequest $r)

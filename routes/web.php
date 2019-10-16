@@ -169,9 +169,6 @@ Route::get('test-model', function () {
 
 
 
-
-
-
 // ---------------BACKEND
 
 Route::get('login','Backend\LoginController@getLogin'); 
@@ -186,6 +183,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('','Backend\CategoryController@getCategory');
         Route::post('','Backend\CategoryController@postCategory');
         Route::get('edit/{idCate}','Backend\CategoryController@getEditCategory');
+        Route::post('edit/{idCate}','Backend\CategoryController@postEditCategory');
         Route::get('delete/{idCate}','Backend\CategoryController@delCategory');
     });
 

@@ -22,11 +22,16 @@
 
 		<div class="row">
 			<div class="col-md-12">
+				@if (session('thongbao'))
+					<div class="alert alert-success" role="alert">
+						<strong>{{ session('thongbao') }}</strong>
+					</div>
+				@endif
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-5">
-
+								<form method="post"> @csrf
 								<div class="form-group">
 									<label for="">Danh mục cha:</label>
 									<select class="form-control" name="parent" >
@@ -40,6 +45,8 @@
 									
 								</div>
 								<button type="submit" class="btn btn-primary">Sửa danh mục</button>
+							</form>
+							
 							</div>
 							<div class="col-md-7">
 								

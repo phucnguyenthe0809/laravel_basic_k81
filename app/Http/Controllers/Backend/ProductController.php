@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\{Product,Category};
 class ProductController extends Controller
 {
    function getListProduct()
    {
-      return view('backend.product.listproduct');
+      $data['products']=Product::paginate(4);
+      return view('backend.product.listproduct',$data);
    }
    function getAddProduct()
    {
