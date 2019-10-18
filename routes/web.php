@@ -34,7 +34,56 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('detail','Frontend\ProductController@getDetail' );
 });
 
-//
+
+// ---------------BACKEND
+
+Route::get('login','Backend\LoginController@getLogin'); 
+
+
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::get('','Backend\IndexController@getIndex'); 
+
+    //category
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('','Backend\CategoryController@getCategory');
+        Route::post('','Backend\CategoryController@postCategory');
+        Route::get('edit/{idCate}','Backend\CategoryController@getEditCategory');
+        Route::post('edit/{idCate}','Backend\CategoryController@postEditCategory');
+        Route::get('delete/{idCate}','Backend\CategoryController@delCategory');
+    });
+
+    //order
+    Route::group(['prefix' => 'order'], function () {
+        Route::get('','Backend\OrderController@getOrder');
+        Route::get('detail','Backend\OrderController@getDetailOrder');
+        Route::get('processed','Backend\OrderController@getProcessed');
+    });
+
+    //product
+    Route::group(['prefix' => 'product'], function () {
+        Route::get('','Backend\ProductController@getListProduct');
+        Route::get('add','Backend\ProductController@getAddProduct');
+        Route::get('edit','Backend\ProductController@getEditProduct');
+    });
+
+    //user
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('','Backend\UserController@getListUser');
+        Route::get('add','Backend\UserController@getAddUser');
+        Route::post('add','Backend\UserController@postAddUser');
+        Route::get('edit/{idUser}','Backend\UserController@getEditUser');
+        Route::post('edit/{idUser}','Backend\UserController@postEditUser');
+        Route::get('del/{idUser}','Backend\UserController@delUser');
+    });
+    
+});
+
+
+
+
+// ----------------------LÝ THUYẾT
+
 Route::group(['prefix' => 'query'], function () {
 
     Route::get('insert', function () {
@@ -164,53 +213,47 @@ Route::get('test-model', function () {
     $user->save();
 });
 
+Route::group(['prefix' => 'lien-ket'], function () {
+        // chú ý:
+        //bảng chính là bảng chứa khoá chính
+        //bảng phụ là bảng chứa khoá ngoại (thương sẽ đặt tên bảng :     [Tên bảng liên kêt]_id )
+
+        //hasOne() :liên kết 1-1 theo chiều thuận  (từ bảng chứa khoá chính sang bảng chứa khoá ngoại)
+        //BelongsTo() :liên kết 1-1 theo chiều Nghịch (Từ bảng chứa khoá ngoại sang bảng chứa khoá chính)
+        //hasMany(): liên kết 1-n
+        //BelongsToMany: liên kết n-n
+      
+
+        // liên kết 1-1 theo chiều thuận
+        Route::get('lk-1-1-t', function () {
+            $user=App\User::find(14);
+            $info=$user->lien_ket_den_bang_info()->first();
+            dd($info->toArray());
+        });
 
 
 
+        // liên kết 1-1 theo chiều nghịch
+
+        Route::get('lk-1-1-n', function () {
+            $info=App\Models\info::find(2);
+            $user=$info->lien_ket_den_bang_users()->first();
+            dd($user->toArray());
+        });
 
 
-// ---------------BACKEND
+        // liên kết 1-n
 
-Route::get('login','Backend\LoginController@getLogin'); 
+        Route::get('lk-1-n', function () {
+            $data['cate']=App\Models\Category::find(6);
+            // $products=$cate->lien_ket_den_bang_product()->get();
+            // dd($products->toArray());
+            return view('test',$data);
+        });
 
 
-Route::group(['prefix' => 'admin'], function () {
-
-    Route::get('','Backend\IndexController@getIndex'); 
-
-    //category
-    Route::group(['prefix' => 'category'], function () {
-        Route::get('','Backend\CategoryController@getCategory');
-        Route::post('','Backend\CategoryController@postCategory');
-        Route::get('edit/{idCate}','Backend\CategoryController@getEditCategory');
-        Route::post('edit/{idCate}','Backend\CategoryController@postEditCategory');
-        Route::get('delete/{idCate}','Backend\CategoryController@delCategory');
-    });
-
-    //order
-    Route::group(['prefix' => 'order'], function () {
-        Route::get('','Backend\OrderController@getOrder');
-        Route::get('detail','Backend\OrderController@getDetailOrder');
-        Route::get('processed','Backend\OrderController@getProcessed');
-    });
-
-    //product
-    Route::group(['prefix' => 'product'], function () {
-        Route::get('','Backend\ProductController@getListProduct');
-        Route::get('add','Backend\ProductController@getAddProduct');
-        Route::get('edit','Backend\ProductController@getEditProduct');
-    });
-
-    //user
-    Route::group(['prefix' => 'user'], function () {
-        Route::get('','Backend\UserController@getListUser');
-        Route::get('add','Backend\UserController@getAddUser');
-        Route::post('add','Backend\UserController@postAddUser');
-        Route::get('edit/{idUser}','Backend\UserController@getEditUser');
-        Route::post('edit/{idUser}','Backend\UserController@postEditUser');
-        Route::get('del/{idUser}','Backend\UserController@delUser');
-    });
-    
+        // liên kết n-n
+        
 });
 
 

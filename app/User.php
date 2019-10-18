@@ -43,4 +43,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function lien_ket_den_bang_info()
+    {
+        return $this->hasOne('App\Models\info', 'users_id', 'id');
+    }
+
+    // public function lien_ket_den_bang_lop()
+    // {
+    //     return $this->belongsToMany('App\Models\Lop', 'Users_lop', 'user_id', 'lop_id');
+    // }
 }

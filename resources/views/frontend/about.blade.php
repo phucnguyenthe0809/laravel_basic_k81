@@ -1,7 +1,6 @@
 @extends('frontend.master.master')
 @section('content')
-		<!-- main -->
-
+	<!-- main -->
 		<div id="colorlib-about">
 			<div class="container">
 				<div class="row">
