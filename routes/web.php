@@ -34,16 +34,13 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('detail','Frontend\ProductController@getDetail' );
 });
 
-
 // ---------------BACKEND
+Route::get('login','Backend\LoginController@getLogin')->middleware('checkLogout'); 
+Route::post('login','Backend\LoginController@postLogin'); 
 
-Route::get('login','Backend\LoginController@getLogin'); 
-
-
-Route::group(['prefix' => 'admin'], function () {
-
+Route::group(['prefix' => 'admin','middleware'=>'checkLogin'], function () {
+    Route::get('logout','Backend\IndexController@logout'); 
     Route::get('','Backend\IndexController@getIndex'); 
-
     //category
     Route::group(['prefix' => 'category'], function () {
         Route::get('','Backend\CategoryController@getCategory');
