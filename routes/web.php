@@ -53,8 +53,9 @@ Route::group(['prefix' => 'admin','middleware'=>'checkLogin'], function () {
     //order
     Route::group(['prefix' => 'order'], function () {
         Route::get('','Backend\OrderController@getOrder');
-        Route::get('detail','Backend\OrderController@getDetailOrder');
+        Route::get('detail/{idOrder}','Backend\OrderController@getDetailOrder');
         Route::get('processed','Backend\OrderController@getProcessed');
+        Route::get('xu-ly/{idOrder}', 'Backend\OrderController@xuLy');
     });
 
     //product

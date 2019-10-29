@@ -4,19 +4,29 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Order;
 class OrderController extends Controller
 {
     function getOrder()
     {
-        return view('backend.order.order');
+        $data['orders']=Order::where('state',0)->get();
+        return view('backend.order.order',$data);
     }
-    function getDetailOrder()
+    function getDetailOrder($idOrder)
     {
-        return view('backend.order.detailorder');
+        $data['order']=Order::findOrFail($idOrder);
+        return view('backend.order.detailorder',$data);
     }
     function getProcessed()
     {
-        return view('backend.order.processed');
+        $data['orders']=Order::where('state',1)->get();
+        return view('backend.order.processed',$data);
+    }
+    function xuLy($idOrder)
+    {
+        $order=Order::find($idOrder);
+        $order->state=1;
+        $order->save();
+        return redirect('admin/order/processed');
     }
 }
