@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>VIETPRO STORE</title>
+	<title>@yield('title')</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<base href="{{ asset('frontend') }}/">
 	<!-- Animate.css -->
@@ -35,7 +35,7 @@
 		@include('frontend.master.menu')
 		@include('frontend.master.slide')
 		<!-- End header -->
-	
+
         @yield('content')
 		<!-- subscribe -->
 		@include('frontend.master.subscribe')
@@ -46,7 +46,8 @@
 	</div>
 
 
-	<!-- jQuery -->
+	@section('script')
+        <!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
 	<script src="js/jquery.easing.1.3.js"></script>
@@ -66,6 +67,7 @@
 	<script src="js/jquery.stellar.min.js"></script>
 	<!-- Main -->
 	<script src="js/main.js"></script>
+    @show
 
 </body>
 

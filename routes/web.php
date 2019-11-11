@@ -20,27 +20,35 @@ Route::get('contact','Frontend\HomeController@getContact');
 //cart
 Route::group(['prefix' => 'cart'], function () {
     Route::get('', 'Frontend\CartController@getCart');
+    Route::get('add', 'Frontend\CartController@addCart');
+    Route::get('del/{rowId}', 'Frontend\CartController@delCart');
+    Route::get('update/{rowId}/{qty}', 'Frontend\CartController@updateCart');
 });
 
 // checkout
 Route::group(['prefix' => 'checkout'], function () {
     Route::get('', 'Frontend\CheckoutController@getCheckout');
-    Route::get('complete', 'Frontend\CheckoutController@getComplete');
+    Route::post('', 'Frontend\CheckoutController@postCheckout');
+    Route::get('complete/{idOrder}', 'Frontend\CheckoutController@getComplete');
 });
 
 // product
 Route::group(['prefix' => 'product'], function () {
     Route::get('shop','Frontend\ProductController@getShop' );
-    Route::get('detail','Frontend\ProductController@getDetail' );
+    Route::get('shop/{slug_cate}','Frontend\ProductController@getCatePrd' );
+    Route::get('detail/{slug}','Frontend\ProductController@getDetail' );
 });
 
+
+
+
 // ---------------BACKEND
-Route::get('login','Backend\LoginController@getLogin')->middleware('checkLogout'); 
-Route::post('login','Backend\LoginController@postLogin'); 
+Route::get('login','Backend\LoginController@getLogin')->middleware('checkLogout');
+Route::post('login','Backend\LoginController@postLogin');
 
 Route::group(['prefix' => 'admin','middleware'=>'checkLogin'], function () {
-    Route::get('logout','Backend\IndexController@logout'); 
-    Route::get('','Backend\IndexController@getIndex'); 
+    Route::get('logout','Backend\IndexController@logout');
+    Route::get('','Backend\IndexController@getIndex');
     //category
     Route::group(['prefix' => 'category'], function () {
         Route::get('','Backend\CategoryController@getCategory');
@@ -60,9 +68,12 @@ Route::group(['prefix' => 'admin','middleware'=>'checkLogin'], function () {
 
     //product
     Route::group(['prefix' => 'product'], function () {
-        Route::get('','Backend\ProductController@getListProduct');
-        Route::get('add','Backend\ProductController@getAddProduct');
-        Route::get('edit','Backend\ProductController@getEditProduct');
+        Route::get('',  'Backend\ProductController@getListProduct');
+        Route::get('add',  'Backend\ProductController@getAddProduct');
+        Route::post('add',  'Backend\ProductController@postAddProduct');
+        Route::get('edit/{idPrd}',  'Backend\ProductController@getEditProduct');
+        Route::post('edit/{idPrd}',  'Backend\ProductController@postEditProduct');
+        Route::get('del/{idPrd}',  'Backend\ProductController@delProduct');
     });
 
     //user
@@ -74,8 +85,13 @@ Route::group(['prefix' => 'admin','middleware'=>'checkLogin'], function () {
         Route::post('edit/{idUser}','Backend\UserController@postEditUser');
         Route::get('del/{idUser}','Backend\UserController@delUser');
     });
-    
+
 });
+
+
+
+
+
 
 
 
@@ -112,7 +128,7 @@ Route::group(['prefix' => 'query'], function () {
         DB::table('users')->where('id',9)->update(['level'=>1]);
     });
 
-    //xoá 
+    //xoá
     Route::get('delete', function () {
         //xoá theo điều kiện
         // DB::table('users')->where('id',9)->delete();
@@ -220,7 +236,7 @@ Route::group(['prefix' => 'lien-ket'], function () {
         //BelongsTo() :liên kết 1-1 theo chiều Nghịch (Từ bảng chứa khoá ngoại sang bảng chứa khoá chính)
         //hasMany(): liên kết 1-n
         //BelongsToMany: liên kết n-n
-      
+
 
         // liên kết 1-1 theo chiều thuận
         Route::get('lk-1-1-t', function () {
@@ -251,7 +267,7 @@ Route::group(['prefix' => 'lien-ket'], function () {
 
 
         // liên kết n-n
-        
+
 });
 
 

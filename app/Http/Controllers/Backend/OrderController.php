@@ -9,7 +9,7 @@ class OrderController extends Controller
 {
     function getOrder()
     {
-        $data['orders']=Order::where('state',0)->get();
+        $data['orders']=Order::where('state',2)->get();
         return view('backend.order.order',$data);
     }
     function getDetailOrder($idOrder)

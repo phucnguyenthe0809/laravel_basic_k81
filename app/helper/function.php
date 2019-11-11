@@ -17,9 +17,9 @@ function getCategory($mang,$parent,$tab,$idSelect)
         {
             if($value['id']==$idSelect)
             {
-                echo '<option selected value="'.$value['id'].'">'.$tab.$value['name'].'</option>';  
+                echo '<option selected value="'.$value['id'].'">'.$tab.$value['name'].'</option>';
             }else {
-                echo '<option value="'.$value['id'].'">'.$tab.$value['name'].'</option>';  
+                echo '<option value="'.$value['id'].'">'.$tab.$value['name'].'</option>';
             }
            getCategory($mang,$value['id'],$tab.'--|',$idSelect);
         }
@@ -39,8 +39,33 @@ function showCategory($mang,$parent,$tab)
                     <a class="btn-category btn-danger" href="/admin/category/delete/'.$value['id'].'"><i class="fas fa-times"></i></i></a>
                 </div>
             </div>
-            ';  
+            ';
             showCategory($mang,$value['id'],$tab.'--|');
         }
     }
+}
+
+//Lấy Cấp bản ghi thêm
+
+function getLevel($danhMuc,$idCha,$cap)
+{
+
+	foreach($danhMuc as $banGhi)
+	{
+		if($banGhi['id']==$idCha)
+		{
+
+			$cap++;
+
+			if($banGhi['parent']==0)
+			{
+				return $cap;
+			}
+
+			return getLevel($danhMuc,$banGhi['parent'],$cap);
+
+		}
+
+	}
+
 }

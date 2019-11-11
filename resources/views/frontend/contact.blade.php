@@ -1,4 +1,5 @@
 @extends('frontend.master.master')
+@section('title','Liên hệ')
 @section('content')
 <!-- main -->
 <div id="colorlib-contact">
@@ -70,5 +71,4 @@
 <div id="map" class="colorlib-map"></div>
 <!-- end main -->
 @stop
-	
-		
+

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddUserRequest;
+use App\Http\Requests\EditUserRequest;
 use Illuminate\Http\Request;
 use App\User;
 class UserController extends Controller
@@ -14,7 +16,7 @@ class UserController extends Controller
     function getAddUser(){
         return view('backend.user.adduser');
     }
-    function postAddUser(request $r)
+    function postAddUser(AddUserRequest $r)
     {
         $user=new User;
         $user->email=$r->email;
@@ -25,7 +27,7 @@ class UserController extends Controller
         $user->level=$r->level;
         $user->save();
         return redirect('admin/user')->with('thongbao','Đã thêm thành công!');
-    
+
     }
 
     function getEditUser($idUser){
@@ -38,7 +40,7 @@ class UserController extends Controller
         User::destroy($idUser);
         return redirect()->back();
     }
-    function postEditUser($idUser,request $r)
+    function postEditUser($idUser,EditUserRequest $r)
     {
         $user=User::find($idUser);
         $user->email=$r->email;

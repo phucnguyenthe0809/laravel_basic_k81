@@ -1,4 +1,5 @@
 @extends('frontend.master.master')
+@section('title','Thông tin')
 @section('content')
 	<!-- main -->
 		<div id="colorlib-about">
@@ -15,7 +16,7 @@
 										<li><a href="#">Thành tựu</a></li>
 										<li><a href="#">Tầm nhìn</a></li>
 										<li><a href="#">sứ mệnh</a></li>
-									
+
 									</ul>
 								</div>
 							</div>

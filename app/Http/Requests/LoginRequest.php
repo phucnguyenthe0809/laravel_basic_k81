@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddCategoryRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,20 @@ class AddCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|unique:category,name',
-           
+            'email'=>'required|email|min:5',
+            'password'=>'required|min:5'
         ];
     }
+
     public function messages()
     {
         return [
-            'name.required'=>'Tên danh mục không được để trống',
-            'name.unique'=>'Danh mục đã tồn tại'
-          
+            'email.required'=>'Không được để trống email',
+            'email.email'=>'email không đúng định dạng',
+            'email.min'=>'email không được nhỏ hơn 5 ký tự',
+            'password.required'=>'Không được để trống Password',
+            'password.min'=>'Password Không được nhỏ hơn 5 ký tự',
+           
         ];
     }
 }

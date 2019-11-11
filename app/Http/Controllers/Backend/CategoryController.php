@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Support\Str;
 use App\Http\Requests\AddCategoryRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditCategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 class CategoryController extends Controller
@@ -15,7 +16,7 @@ class CategoryController extends Controller
         $data['categories']=Category::all()->toarray();
         return view('backend.category.category',$data);
     }
-    
+
     function getEditCategory($idCate)
     {
         $data['cate']=Category::find($idCate);
@@ -23,7 +24,7 @@ class CategoryController extends Controller
         return view('backend.category.editcategory',$data);
     }
 
-    function postEditCategory($idCate,request $r)
+    function postEditCategory($idCate,EditCategoryRequest $r)
     {
         $cate=Category::findOrFail($idCate);
         $cate->name=$r->name;
@@ -39,13 +40,18 @@ class CategoryController extends Controller
         //khai báo thư viện Str:     use Illuminate\Support\Str;
         //phiên bản 5.8
         //không cần khai báo thư viện Str : dùng str_slug('giá trị cần chuyển')
-      $cate=new Category;
-      $cate->name=$r->name;
-      $cate->slug=Str::slug($r->name,'-');
-      $cate->parent=$r->parent;
-      $cate->save();
-      return redirect()->back();
-    }
+        $categories=category::all()->toArray();
+        if(getLevel($categories, $r->idParent, 1)<3) {
+            $cate=new Category;
+            $cate->name=$r->name;
+            $cate->slug=Str::slug($r->name,'-');
+            $cate->parent=$r->parent;
+            $cate->save();
+            return redirect()->back();
+        }else {
+            return redirect()->back()->withErrors(['name'=>'Trang web không hỗ trợ danh mục > 2 cấp']);
+        }
+}
     function delCategory($idCate)
     {
         //tìm danh mục muốn xoá

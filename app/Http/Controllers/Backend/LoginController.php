@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -13,7 +14,7 @@ class LoginController extends Controller
         return view('backend.login');
     }
 
-    function postLogin(request $r)
+    function postLogin(LoginRequest $r)
     {
         $email=$r->email;
         $password=$r->password;

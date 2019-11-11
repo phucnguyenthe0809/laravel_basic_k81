@@ -14,29 +14,31 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Thêm sản phẩm</div>
                     <div class="panel-body">
+                            <form  method="post" enctype="multipart/form-data">
+                                @csrf
                         <div class="row" style="margin-bottom:40px">
-                             
+
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label>Danh mục</label>
                                             <select name="category" class="form-control">
-                                                <option value='1' selected>Nam</option>
-                                                <option value='3'>---|Áo khoác nam</option>
-                                                <option value='2'>Nữ</option>
-                                                <option value='4'>---|Áo khoác nữ</option>
+                                                    {{ getCategory($categories,0,'',0) }}
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Mã sản phẩm</label>
                                             <input type="text" name="code" class="form-control">
+                                            {{ showError($errors,'code') }}
                                         </div>
                                         <div class="form-group">
                                             <label>Tên sản phẩm</label>
                                             <input type="text" name="name" class="form-control">
+                                            {{ showError($errors,'name') }}
                                         </div>
                                         <div class="form-group">
                                             <label>Giá sản phẩm (Giá chung)</label>
                                             <input type="number" name="price" class="form-control">
+                                            {{ showError($errors,'price') }}
                                         </div>
                                         <div class="form-group">
                                             <label>Sản phẩm có nổi bật</label>
@@ -68,8 +70,8 @@
                                         </div>
                                      </div>
 
-                     
-                        
+
+
                         </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -82,6 +84,7 @@
                                 </div>
                             </div>
                         <div class="clearfix"></div>
+                    </form>
                     </div>
                 </div>
 
@@ -112,6 +115,6 @@
                    $('#img').click();
                });
            });
-   
-       </script> 
+
+       </script>
    @stop

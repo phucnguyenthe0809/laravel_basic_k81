@@ -1,4 +1,5 @@
 @extends('frontend.master.master')
+@section('title','Thanh Toán')
 @section('content')
 		<!-- main -->
 
@@ -22,9 +23,11 @@
 						</div>
 					</div>
 				</div>
+				<form method="post">
+                            @csrf
 				<div class="row">
-					<div class="col-md-7">
-							<form method="post" class="colorlib-form">
+					<div class="col-md-7 colorlib-form">
+
 							<h2>Chi tiết thanh toán</h2>
 							<div class="row">
 								<div class="col-md-6">
@@ -59,7 +62,7 @@
 									</div>
 								</div>
 							</div>
-						
+
 					</div>
 					<div class="col-md-5">
 						<div class="cart-detail">
@@ -68,12 +71,15 @@
 								<li>
 
 									<ul>
-										<li><span>1 x Tên sản phẩm</span> <span>₫ 990.000</span></li>
-										<li><span>1 x Tên sản phẩm</span> <span>₫ 780.000</span></li>
+                                        @foreach ($products as $row)
+                                    <li><span>{{$row->qty}} x {{$row->name}}</span> <span>₫ {{number_format($row->qty*$row->price,0,"",".")}}</span></li>
+                                        @endforeach
+
+
 									</ul>
 								</li>
 
-								<li><span>Tổng tiền đơn hàng</span> <span>₫ 1.370.000</span></li>
+								<li><span>Tổng tiền đơn hàng</span> <span>₫ {{$total}}</span></li>
 							</ul>
 						</div>
 
@@ -83,11 +89,28 @@
 							</div>
 						</div>
 					</div>
-				</form>
-				</div>
+                </div>
+            </form>
 			</div>
 		</div>
 
 		<!-- end main -->
 @stop
-		
+@section('script')
+@parent
+<script>
+        var quantity=1;
+        $('.quantity-right-plus').click(function () {
+            var quantity = parseInt($('#quantity').val());
+            $('#quantity').val(quantity + 1);
+        });
+
+        $('.quantity-left-minus').click(function (e) {
+            var quantity = parseInt($('#quantity').val());
+                if (quantity > 1) {
+                    $('#quantity').val(quantity - 1);
+                }
+        });
+    </script>
+
+@endsection
