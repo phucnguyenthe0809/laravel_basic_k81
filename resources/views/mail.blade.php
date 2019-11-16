@@ -1,0 +1,1 @@
+<h1  style="text-align: center;background-color: brown; padding: 20px 0;">{{ $name }}</h1>

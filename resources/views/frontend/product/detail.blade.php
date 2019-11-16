@@ -1,5 +1,7 @@
 @extends('frontend.master.master')
-@section('title','Chi tiet san pham')
+@section('title')
+{{ $prd->name }}
+@endsection
 @section('content')
 <div class="colorlib-shop">
         <div class="container">

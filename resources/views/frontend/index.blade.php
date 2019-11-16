@@ -87,9 +87,9 @@
                             <div class="product-img" style="background-image: url(/backend/img/{{$row->img}});">
                                 <div class="cart">
                                     <p>
-                                        <span class="addtocart"><a href="/cart/add/?id_product={{ $row->id }}"><i
+                                        <span class="addtocart"><a href="/cart/add/?quantity=1&id_product={{ $row->id }}"><i
                                                     class="icon-shopping-cart"></i></a></span>
-                                        <span><a href="/product/detail/{{$row->slug}}-{{$row->id}}"><i class="icon-eye"></i></a></span>
+                                        <span><a href="/product/detail/{{$row->slug}}-{{$row->id}}.html"><i class="icon-eye"></i></a></span>
 
 
                                     </p>

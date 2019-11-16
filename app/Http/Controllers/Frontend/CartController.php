@@ -10,31 +10,22 @@ use Cart;
 class CartController extends Controller
 {
     function getCart() {
-
+      
         $data['products']=Cart::content();
         $data['total']=Cart::total(0,"",".");
        return view('frontend.cart.cart',$data);
     }
 
     function addCart(request $r) {
-        if(isset($r->quantity)){
-            $product=Product::find($r->id_product);
-            Cart::add(['id' => $product->code,
-            'name' => $product->name,
-            'qty' => $r->quantity,
-            'price' => $product->price,
-            'weight' => 0,
-            'options' => ['img' => $product->img]]);
-        }else{
-            $product=Product::find($r->id_product);
-            Cart::add(['id' => $product->code,
-            'name' => $product->name,
-            'qty' => 1,
-            'price' => $product->price,
-            'weight' => 0,
-            'options' => ['img' => $product->img]]);
-        }
 
+            $product=Product::find($r->id_product);
+            Cart::add([
+              'id' => '293ad', 
+              'name' => 'Product 1',
+              'qty' => $r->quantity,
+               'price' => 9.99,
+              'weight' => 550, 
+              'options' => ['img' => $product->img]]);
 
         return redirect('cart');
     }
@@ -45,7 +36,13 @@ class CartController extends Controller
     }
 
     function updateCart($rowId,$qty){
-        Cart::update($rowId, $qty);
+       if( Cart::update($rowId, $qty)){
         return 'success';
+       }
+       else
+       {
+           return 'error';
+       }
+     
     }
 }

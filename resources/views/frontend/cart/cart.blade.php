@@ -122,21 +122,22 @@
                 if (quantity > 1) {
                     $('#quantity').val(quantity - 1);
                 }
-        });
-</script>
-<script>
-function update(rowId,qty){
-    $.get("/cart/update/"+rowId+"/"+qty,
-        function(data){
-            if(data=='success'){
-                location.reload();
-            }else{
-                alert('update không thành công');
-            }
-        }
-    )
+		});
+
+		
+		function update(rowId,qty){
+    // $.get("/cart/update/"+rowId+"/"+qty,
+    //     function(data){
+    //         if(data=='success'){
+    //             location.reload();
+    //         }else{
+    //             alert('update không thành công');
+    //         }
+    //     }
+    // )
 }
 
 </script>
+
 
 @endsection

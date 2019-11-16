@@ -10,8 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
+Route::get('dang-ky','Frontend\HomeController@sendMail' );
 Route::get('','Frontend\HomeController@getIndex' );
 Route::get('about', 'Frontend\HomeController@getAbout');
 Route::get('contact','Frontend\HomeController@getContact');
@@ -36,7 +35,7 @@ Route::group(['prefix' => 'checkout'], function () {
 Route::group(['prefix' => 'product'], function () {
     Route::get('shop','Frontend\ProductController@getShop' );
     Route::get('shop/{slug_cate}','Frontend\ProductController@getCatePrd' );
-    Route::get('detail/{slug}','Frontend\ProductController@getDetail' );
+    Route::get('detail/{slug}.html','Frontend\ProductController@getDetail' );
 });
 
 
